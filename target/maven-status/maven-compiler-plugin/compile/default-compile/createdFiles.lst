@@ -1,0 +1,10 @@
+com\nrd\o2o\entity\LocalAuth.class
+com\nrd\o2o\entity\Product.class
+com\nrd\o2o\entity\WechatAuth.class
+com\nrd\o2o\entity\Shop.class
+com\nrd\o2o\entity\ProductImg.class
+com\nrd\o2o\entity\HeadLine.class
+com\nrd\o2o\entity\ProductCategory.class
+com\nrd\o2o\entity\PersonInfo.class
+com\nrd\o2o\entity\ShopCategory.class
+com\nrd\o2o\entity\Area.class
