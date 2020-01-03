@@ -25,5 +25,5 @@
 		<property name="suffix" value=".html"></property>
 	</bean>
 	<!-- 4.扫描web相关的bean -->
-	<context:component-scan base-package="com.nrd.web" />
+	<context:component-scan base-package="com.nrd.o2o.web" />
 </beans>
