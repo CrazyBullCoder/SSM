@@ -3,8 +3,8 @@ package com.nrd.o2o.entity;
 import java.util.Date;
 
 public class ShopCategory {
-	private Long shopCateforyId;
-	private String shopCateforyName;
+	private Long shopCategoryId;
+	private String shopCategoryName;
 	private String shopCateforyDesc;
 	private String shopCateforyImg;
 	private Integer priority;
@@ -12,20 +12,20 @@ public class ShopCategory {
 	private Date lastEditTime;
 	private ShopCategory parent;
 
-	public Long getShopCateforyId() {
-		return shopCateforyId;
+	public Long getShopCategoryId() {
+		return shopCategoryId;
 	}
 
-	public void setShopCateforyId(Long shopCateforyId) {
-		this.shopCateforyId = shopCateforyId;
+	public void setShopCategoryId(Long shopCategoryId) {
+		this.shopCategoryId = shopCategoryId;
 	}
 
-	public String getShopCateforyName() {
-		return shopCateforyName;
+	public String getShopCategoryName() {
+		return shopCategoryName;
 	}
 
 	public void setShopCateforyName(String shopCateforyName) {
-		this.shopCateforyName = shopCateforyName;
+		this.shopCategoryName = shopCateforyName;
 	}
 
 	public String getShopCateforyDesc() {
