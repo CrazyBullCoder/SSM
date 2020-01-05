@@ -41,7 +41,7 @@ $(function() {
 							return !this.selected;
 						}).data("id")
 					};
-					var shopImg = $('shop-img')[0].files[0];
+					var shopImg = $('#shop-img')[0].files[0];
 					var formData = new FormData();
 					formData.append('shopImg', shopImg);
 					formData.append('shopStr', JSON.stringify(shop));
@@ -56,7 +56,7 @@ $(function() {
 						type : 'POST',
 						data : formData,
 						contentType : false,
-						proceesData : false,
+						processData : false,
 						cache : false,
 						success : function(data) {
 							if (data.success) {
