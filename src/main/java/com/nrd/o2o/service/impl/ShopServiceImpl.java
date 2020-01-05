@@ -1,12 +1,12 @@
 package com.nrd.o2o.service.impl;
 
 import java.io.File;
+import java.io.InputStream;
 import java.util.Date;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.nrd.o2o.dao.ShopDao;
 import com.nrd.o2o.dto.ShopExecution;
@@ -23,20 +23,15 @@ public class ShopServiceImpl implements ShopService {
 	@Autowired
 	private ShopDao shopDao;
 
-	
-
-
-	private void addShopImg(Shop shop, File shopImg) {
-		// dest = "/upload/item/shop/" + shopId + "/"
+	private void addShopImg(Shop shop, InputStream shopImgInputStream, String fileName) {
 		String dest = PathUtil.getShopImagePath(shop.getShopId());
-		// shopImgAddr =
-		String shopImgAddr = ImageUtil.gererateThumbnail(shopImg, dest);
+		String shopImgAddr = ImageUtil.gererateThumbnail(shopImgInputStream, fileName, dest);
 		shop.setShopImg(shopImgAddr);
 	}
 
 	@Transactional
 	@Override
-	public ShopExecution addShop(Shop shop, File shopImg) {
+	public ShopExecution addShop(Shop shop, InputStream shopImgInputStream, String fileName) {
 		if (shop == null) {
 			return new ShopExecution(ShopStateEnum.NULL_SHOP);
 		}
@@ -49,8 +44,8 @@ public class ShopServiceImpl implements ShopService {
 				throw new ShopOperationException("店铺创建失败");
 			} else {
 				try {
-					if (shopImg != null) {
-						addShopImg(shop, shopImg);
+					if (shopImgInputStream != null) {
+						addShopImg(shop, shopImgInputStream, fileName);
 					}
 				} catch (Exception e) {
 					throw new ShopOperationException("addShopImg error:" + e.getMessage());

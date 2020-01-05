@@ -2,11 +2,11 @@
  * 
  */
 $(function() {
-	var initUrl = '/o2o/shop/getshopinitinfo';
+	var initUrl = '/o2o/shopadmin/getshopinitinfo';
 	var registerShopUrl = '/o2o/shopadmin/registershop';
 	alert(initUrl);
 	getShopInitInfo();
-	function gerShopInitInfo() {
+	function getShopInitInfo() {
 		$.getJSON(initUrl, function(data) {
 			if (data.success) {
 				var tempHtml = '';
@@ -45,6 +45,11 @@ $(function() {
 					var formData = new FormData();
 					formData.append('shopImg', shopImg);
 					formData.append('shopStr', JSON.stringify(shop));
+					var verfyCodeActual = $('#j_captcha').val();
+					if(!verfyCodeActual){
+						$.toast('请输入验证码!');
+						return;
+					}
 					$.ajax({
 						url : registerShopUrl,
 						type : 'POST',

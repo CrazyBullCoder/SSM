@@ -2,6 +2,7 @@ package com.nrd.o2o.util;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
@@ -18,29 +19,6 @@ public class ImageUtil {
 	private static final SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static final Random r = new Random();
 
-	public static String gererateThumbnail(CommonsMultipartFile shopImg, String targetAddr) {
-		String realFileName = getRandomFileName();
-		String extension = getFileExtension(shopImg);
-		makeDirPath(targetAddr);
-		String relativeAddr = targetAddr + realFileName + extension;
-		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
-		// File dest = new File("E:\\Pictures\\upload\\item\\shop\\37");
-		File waterMark = new File(basePath + "\\watermark.jpg");
-		try {
-			Thumbnails.of(shopImg.getInputStream()).size(160, 160).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(waterMark), 0.5f)
-					.outputQuality(0.8).toFile(dest);
-
-			/*
-			 * Thumbnails.of(thumbnail).size(160, 160) .watermark(Positions.BOTTOM_RIGHT,
-			 * ImageIO.read(new
-			 * File("E:\\eclipse-workspace\\o2o\\src\\main\\resources\\watermark.jpg")),
-			 * 0.5f) .outputQuality(0.8).toFile(new File("E:\\Pictures\\1_1.jpg"));
-			 */
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		return relativeAddr;
-	}
 	public static String gererateThumbnail(File shopImg, String targetAddr) {
 		String realFileName = getRandomFileName();
 		String extension = getFileExtension(shopImg);
@@ -84,9 +62,8 @@ public class ImageUtil {
 	 * @param thumbnail
 	 * @return
 	 */
-	private static String getFileExtension(CommonsMultipartFile shopImg) {
-		String originalFilename = shopImg.getName();
-		return originalFilename.substring(originalFilename.lastIndexOf("."));
+	private static String getFileExtension(String fileName) {
+		return fileName.substring(fileName.lastIndexOf("."));
 	}
 	private static String getFileExtension(File shopImg) {
 		String originalFilename = shopImg.getName();
@@ -110,5 +87,24 @@ public class ImageUtil {
 		Thumbnails.of(new File("E:\\Pictures\\1.jpg")).size(160, 160)
 				.watermark(Positions.BOTTOM_RIGHT, ImageIO.read(new File(basePath + "\\watermark.jpg")), 0.5f)
 				.outputQuality(0.8).toFile(new File("E:\\Pictures\\1_1.jpg"));
+	}
+	public static String gererateThumbnail(InputStream thumbnailInputStream, String fileName, String targetAddr) {
+
+		String realFileName = getRandomFileName();
+		String extension = getFileExtension(fileName);
+		makeDirPath(targetAddr);
+		String relativeAddr = targetAddr + realFileName + extension;
+		File dest = new File(PathUtil.getImgBasePath() + relativeAddr);
+		// File dest = new File("E:\\Pictures\\upload\\item\\shop\\37");
+		File waterMark = new File(basePath + "\\watermark.jpg");
+		try {
+			Thumbnails.of(thumbnailInputStream).size(160, 160).watermark(Positions.BOTTOM_RIGHT, ImageIO.read(waterMark), 0.5f)
+					.outputQuality(0.8).toFile(dest);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return relativeAddr;
+	
 	}
 }
