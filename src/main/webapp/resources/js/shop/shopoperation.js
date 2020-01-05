@@ -50,6 +50,7 @@ $(function() {
 						$.toast('请输入验证码!');
 						return;
 					}
+					formData.append("verfyCodeActual",verfyCodeActual);
 					$.ajax({
 						url : registerShopUrl,
 						type : 'POST',
@@ -63,6 +64,7 @@ $(function() {
 							} else {
 								$.toast('提交失败!' + data.errMsg);
 							}
+							$('#captcha_img').clik();
 						}
 					})
 				});
